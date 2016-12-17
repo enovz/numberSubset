@@ -1,8 +1,10 @@
 
 'use strict';
 
+//generate permutations
 
-let result = (function (startNumber) {
+let permutations = (function getPermutationsFor(number) {
+
 
     function mutate(numberSequence, index = 0, result = []) {
 
@@ -109,12 +111,18 @@ let result = (function (startNumber) {
         }
     }
 
-    let numberSequence = parseToArray(startNumber);
+    let numberSequence = parseToArray(number);
     let permutations = mutate(numberSequence);
     let result = parseToNumbers(permutations.slice());
-
+    
     return result;
 
-} (2154));
+} (215));
 
-console.log(result);
+
+
+console.log("Number of permutations: " + permutations.length);
+console.log(permutations);
+
+
+//end of permutations generation

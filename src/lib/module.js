@@ -7,12 +7,14 @@ const module = (function () {
         $reset = $el.find("reset");
 
     //bind events
-    $button.on("click", permutationsSubset($input));
+    $button.on("click", getResult($input));
 
 
     //methods
+    function getResult(center){
 
-
+    }
+    
     //return
     return {
         getSubset: permutationsSubset,
