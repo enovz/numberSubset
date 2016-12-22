@@ -11,8 +11,8 @@ let result = (function subSetOf(permutations, radius = 1) {
 
         let result = [];
 
-        result[0] =  sorted[centerIndex - radius] ? sorted[centerIndex - radius] : "Number : " + center + " is the samllest"; 
-        result[1] =  sorted[centerIndex + radius] ? sorted[centerIndex + radius] : "Number : " + center + " is the biggest";
+        result[0] =  sorted[centerIndex - radius] ? sorted[centerIndex - radius] :  center; 
+        result[1] =  sorted[centerIndex + radius] ? sorted[centerIndex + radius] :  center;
 
         return result;
 

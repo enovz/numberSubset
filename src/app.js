@@ -2,17 +2,16 @@
 'use strict';
 
 let numberModule = (function () {
-
-    //chache DOM
-    let $el = $("#number-module"),
-        $button = $el.find("button"),
-        $input = $el.find("input");
-
-    //bind events
-    $button.on("click", _public.getNumbers($input))
+    
+    //view
+    let $el = $("#numberModule");
+    let view = {
+        button : $el.find("button"),
+        input: $el.find("input")   
+    }
 
     //methods
-    let _private = {
+    let methods = {
 
         isValid: function isValid(input) {
 
@@ -93,7 +92,7 @@ let numberModule = (function () {
                     let newPermutations = permutations.slice();
                     newPermutations.push(number);
 
-                    let newPermutaiton = mutate(firstPermutation[0], permutation.slice());
+                    let newPermutaiton = mutate(array[0], permutation.slice());
                     return getPermutations(newPermutaiton, newPermutations);
                 }
             }
@@ -111,8 +110,8 @@ let numberModule = (function () {
 
                 let result = [];
 
-                result[0] = sorted[centerIndex - radius] ? sorted[centerIndex - radius] : "Number : " + center + " is the samllest";
-                result[1] = sorted[centerIndex + radius] ? sorted[centerIndex + radius] : "Number : " + center + " is the biggest";
+                result[0] = sorted[centerIndex - radius] ? sorted[centerIndex - radius] : center;
+                result[1] = sorted[centerIndex + radius] ? sorted[centerIndex + radius] : center;
 
                 return result;
 
@@ -122,15 +121,18 @@ let numberModule = (function () {
         }
     };
 
-    let _public = {
+    //controller
+    let controller = {
 
-        getNumbers: function (input) {
+        getNumbers: function (number) {
 
-            if (_private.isValid(input)) {
+            let input = view.input.val() || number;
 
-                let firstPermutation = _private.toArray(input);
-                let permutations = _private.permutate(firstPermutation);
-                let subSet = _private.subSetOf(permutations);
+            if (methods.isValid(input)) {
+
+                let firstPermutation = methods.toArray(input);
+                let permutations = methods.permutate(firstPermutation);
+                let subSet = methods.subSetOf(permutations);
 
                 return subSet;
             }
@@ -140,6 +142,14 @@ let numberModule = (function () {
         }
     };
 
-    return _public;
+    //bind events
+    view.button.on("click", controller.getNumbers);
+
+
+    let api = {
+        getNumbers: controller.getNumbers
+    }
+
+    return api;
 
 })()
