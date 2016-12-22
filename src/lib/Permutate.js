@@ -69,7 +69,7 @@ let permutations = (function () {
     }
 
     let firstPermutation = toArray(input);
-
+    
     return getPermutations(firstPermutation);
 
 } (input))
