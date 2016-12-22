@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <head>
+	<link rel="stylesheet" href="./lib/bootstrap.min.css">
+	<link rel="stylesheet" href="./style.css">
 	<script type="text/javascript" src="./lib/jquery.min.js"></script>
 </head>
 
 <body>
-	<div id="numberModule">
-		<input placeholder="Enter number" type="text">
-		<button id="getNumbers">Go</button>
-		<ul id="numberList"></ul>
-	</div>
+	<div class="container">
+		<div id="numberModule">
+			<h2>Instructions</h2>
+		
+			<input type="text" class="form-control" placeholder="Enter number" >
 
+			</hr>
+			<div class = "result"></div>
+			<!-- create div for result to hold list -->
+
+			<ul id="numberList"></ul>
+
+			<button id="getNumbers" type="button" class="btn btn-block btn-success">Go</button>
+
+		</div>
+	</div>
 
 	<!-- app -->
 	<script type="text/javascript" src="./app.js"></script>
