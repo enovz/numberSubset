@@ -17,13 +17,18 @@ let numberModule = (function () {
 
         refresh: function refresh(input) {
 
-            if (view.template.length !== 0) {
-                view.template.empty();
-            }
+            if (input !== null) {
+                if (view.template.length !== 0) {
+                    view.template.empty();
+                }
 
-            input.forEach(item => {
-                view.template.append("<li>" + item + "</li>");
-            });
+                input.forEach(item => {
+                    view.template.append("<li>" + item + "</li>");
+                });
+            }
+            else{
+                alert("Invalid input");
+            }
 
         },
         isValid: function isValid(input) {
@@ -148,14 +153,16 @@ let numberModule = (function () {
                 return subSet;
             }
             else {
-                return "Invalid Input";
+                return null;
             }
         }
     };
 
     //events
     let eventHandler = {
+
         buttonClick: function () {
+
             let input = view.input.val();
             let result = controller.getNumbers(input);
 
