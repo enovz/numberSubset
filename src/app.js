@@ -154,7 +154,7 @@ let numberModule = (function () {
     };
 
     //events
-    let events = {
+    let eventHandler = {
         buttonClick: function () {
             let input = view.input.val();
             let result = controller.getNumbers(input);
@@ -164,7 +164,7 @@ let numberModule = (function () {
     }
 
     //bind events
-    view.button.on("click", events.buttonClick);
+    view.button.on("click", eventHandler.buttonClick);
 
     let api = {
         getNumbers: controller.getNumbers
