@@ -1,77 +1,78 @@
 
 'use strict';
 
-function toArray(number, arr = []) {
+let input = 236;
 
-    if (number % 10 === number) {
-        arr.unshift(number);
-        return arr;
+let permutations = (function () {
+
+    function toArray(number, arr = []) {
+
+        if (number % 10 === number) {
+            arr.unshift(number);
+            return arr;
+        }
+        else {
+            let newArr = [];
+            let arrItem = number % 10;
+
+            newArr.unshift(arrItem);
+            newArr = newArr.concat(arr);
+
+            let newNumber = Math.floor(number / 10);
+            return toArray(newNumber, newArr);
+        }
     }
-    else {
-        let newArr = [];
-        let arrItem = number % 10;
+    function toNumber(permutation) {
 
-        newArr.unshift(arrItem);
-        newArr = newArr.concat(arr);
+        let numberSet = permutation.slice();
 
-        let newNumber = Math.floor(number / 10);
-        return toArray(newNumber, newArr);
+        let number = numberSet.reduce((a, b) => {
+            return Number(a + "" + b);
+        });
+
+        return number;
     }
-}
-function toNumber(permutation) {
+    function mutate(mutator, permutation) {
 
-    let numberSet = permutation.slice();
+        let newPermutation = permutation.slice();
+        let mutatorIndex = permutation.indexOf(mutator);
 
-    let number = numberSet.reduce((a, b) => {
-        return Number(a + "" + b);
-    });
+        if (mutatorIndex !== permutation.length - 1) {
 
-    return number;
-}
-function mutate(mutator, permutation) {
+            let mutationTarget = permutation[mutatorIndex + 1];
 
-    let newPermutation = permutation.slice();
-    let mutatorIndex = permutation.indexOf(mutator);
+            newPermutation[mutatorIndex + 1] = mutator;
+            newPermutation[mutatorIndex] = mutationTarget;
+        }
+        else {
 
-    if (mutatorIndex !== permutation.length - 1) {
+            newPermutation[mutatorIndex] = newPermutation[0];
+            newPermutation[0] = mutator;
+        }
 
-        let mutationTarget = permutation[mutatorIndex + 1];
-
-        newPermutation[mutatorIndex + 1] = mutator;
-        newPermutation[mutatorIndex] = mutationTarget;
+        return newPermutation;
     }
-    else {
+    function getPermutations(permutation, permutations = []) {
 
-        newPermutation[mutatorIndex] = newPermutation[0];
-        newPermutation[0] = mutator;
+        let number = toNumber(permutation.slice());
+
+        if (permutations.indexOf(number) !== -1) {
+            return permutations;
+        }
+        else {
+            let newPermutations = permutations.slice();
+            newPermutations.push(number);
+
+            let newPermutaiton = mutate(firstPermutation[0], permutation.slice());
+            return getPermutations(newPermutaiton, newPermutations);
+        }
     }
 
-    return newPermutation;
-}
-function getPermutations(permutation, permutations = []) {
-
-    let number = toNumber(permutation.slice());
-
-    if (permutations.indexOf(number) !== -1) {
-        return permutations;
-    }
-    else {
-        let newPermutations = permutations.slice();
-        newPermutations.push(number);
-
-        let newPermutaiton = mutate(firstPermutation[0], permutation.slice());
-        return getPermutations(newPermutaiton, newPermutations);
-    }
-}
-function Permutate(firstPermutation) {
+    let firstPermutation = toArray(input);
 
     return getPermutations(firstPermutation);
-}
+
+} (input))
 
 
-//test
-let input = 236;
-let firstPermutation = toArray(input);
 
-let result = Permutate(firstPermutation);
-//end test
