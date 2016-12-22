@@ -2,17 +2,29 @@
 'use strict';
 
 let numberModule = (function () {
-    
+
     //view
     let $el = $("#numberModule");
     let view = {
-        button : $el.find("button"),
-        input: $el.find("input")   
+        button: $el.find("button"),
+        input: $el.find("input"),
+        template: $el.find("#numberList")
     }
 
     //methods
     let methods = {
 
+        refresh: function refresh(input) {
+
+            if (view.template.length !== 0) {
+                view.template.empty();
+            }
+
+            input.forEach(item => {
+                view.template.append("<li>" + item + "</li>");
+            });
+
+        },
         isValid: function isValid(input) {
 
             function validate(number) {
@@ -134,7 +146,7 @@ let numberModule = (function () {
                 let permutations = methods.permutate(firstPermutation);
                 let subSet = methods.subSetOf(permutations);
 
-                return subSet;
+                return methods.refresh(subSet) || subSet;
             }
             else {
                 return "Invalid Input";
@@ -144,7 +156,6 @@ let numberModule = (function () {
 
     //bind events
     view.button.on("click", controller.getNumbers);
-    
 
     let api = {
         getNumbers: controller.getNumbers
