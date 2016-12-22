@@ -6,6 +6,7 @@ let numberModule = (function () {
     //view
     let $el = $("#numberModule");
     let view = {
+
         button: $el.find("button"),
         input: $el.find("input"),
         template: $el.find("#numberList")
@@ -130,7 +131,7 @@ let numberModule = (function () {
             }
 
             return getSubSet(array);
-        }
+        },
     };
 
     //controller
@@ -138,15 +139,13 @@ let numberModule = (function () {
 
         getNumbers: function (number) {
 
-            let input = view.input.val() || number;
+            if (methods.isValid(number)) {
 
-            if (methods.isValid(input)) {
-
-                let firstPermutation = methods.toArray(input);
+                let firstPermutation = methods.toArray(number);
                 let permutations = methods.permutate(firstPermutation);
                 let subSet = methods.subSetOf(permutations);
 
-                return methods.refresh(subSet) || subSet;
+                return subSet;
             }
             else {
                 return "Invalid Input";
@@ -154,8 +153,18 @@ let numberModule = (function () {
         }
     };
 
+    //events
+    let events = {
+        buttonClick: function () {
+            let input = view.input.val();
+            let result = controller.getNumbers(input);
+
+            return methods.refresh(result);
+        }
+    }
+
     //bind events
-    view.button.on("click", controller.getNumbers);
+    view.button.on("click", events.buttonClick);
 
     let api = {
         getNumbers: controller.getNumbers
