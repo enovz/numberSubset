@@ -6,33 +6,7 @@
 let permutations = (function getPermutationsFor(number) {
 
 
-    function mutate(numberSequence, index = 0, result = []) {
-
-        if (numberSequence.length < 4) {
-            return getPermutations(numberSequence);
-        }
-        if (index > numberSequence.length - 1) {
-            return result;
-        }
-        else {
-            let base = numberSequence[index];
-            let permutation = numberSequence.slice();
-            permutation.splice(numberSequence.indexOf(base), 1);
-
-            let subPermutations = getPermutations(permutation);
-
-            subPermutations.forEach(permutation => {
-                let newPermutation = [base]
-                newPermutation = newPermutation.concat(permutation);
-
-                result.push(newPermutation);
-            });
-
-            let newResult = result.slice();
-            return mutate(numberSequence, index + 1, newResult);
-        }
-    }
-    function getPermutations(permutation, index = 0, permutations = []) {
+    function mutate(permutation, index = 0, permutations = []) {
 
         if (index > permutation.length - 1) {
             return permutations;
@@ -44,7 +18,7 @@ let permutations = (function getPermutationsFor(number) {
             let permutationGroup = getPermutationGroup(base, newPermutation);
 
             let newPermutations = permutations.concat(permutationGroup);
-            return getPermutations(permutation, index + 1, newPermutations);
+            return mutate(permutation, index + 1, newPermutations);
         }
 
     }
