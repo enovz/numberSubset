@@ -1,15 +1,15 @@
-const module = (function () {
+const numberModule = (function () {
 
     //chache DOM
     let $el = $("#number-module"),
         $button = $el.find("button"),
-        $input = $el.find("input"),
-        $reset = $el.find("reset");
+        $input = $el.find("input");
 
     //bind events
     $button.on("click", getResult($input));
 
-
+    render();
+    
     //methods
     function getResult(center){
 
@@ -17,8 +17,7 @@ const module = (function () {
     
     //return
     return {
-        getSubset: permutationsSubset,
-        reset: reset
+        
     }
 
 } ())
