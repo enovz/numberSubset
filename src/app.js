@@ -144,7 +144,7 @@ let numberModule = (function () {
 
     //bind events
     view.button.on("click", controller.getNumbers);
-
+    
 
     let api = {
         getNumbers: controller.getNumbers
