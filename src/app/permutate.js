@@ -1,27 +1,10 @@
 
 'use strict';
 
-let input = 236;
+let input = [2,3,4];
 
-let permutations = (function () {
+let permutations = (function permutate(firstPermutation) {
 
-    function toArray(number, arr = []) {
-
-        if (number % 10 === number) {
-            arr.unshift(number);
-            return arr;
-        }
-        else {
-            let newArr = [];
-            let arrItem = number % 10;
-
-            newArr.unshift(arrItem);
-            newArr = newArr.concat(arr);
-
-            let newNumber = Math.floor(number / 10);
-            return toArray(newNumber, newArr);
-        }
-    }
     function toNumber(permutation) {
 
         let numberSet = permutation.slice();
@@ -67,12 +50,10 @@ let permutations = (function () {
             return getPermutations(newPermutaiton, newPermutations);
         }
     }
-
-    let firstPermutation = toArray(input);
     
     return getPermutations(firstPermutation);
 
-} (input))
+} (input));
 
 
 
