@@ -158,7 +158,7 @@ let numberModule = (function () {
         }
     };
 
-    //events
+    //eventHandler
     let eventHandler = {
 
         buttonClick: function () {
