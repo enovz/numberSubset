@@ -1,12 +1,12 @@
 
 'use strict';
 
-let permutations = [234, 243, 324, 342, 423, 432];
+let input= [234, 243, 324, 342, 423, 432];
 
-let result = (function subSetOf(sequence, radius = 1) {
+let result = (function subSetOf(permutations, radius = 1) {
 
-        let center = sequence[0];
-        let sorted = sequence.slice().sort();
+        let center = permutations[0];
+        let sorted = permutations.slice().sort();
         let centerIndex = sorted.indexOf(center);
 
         let result = [];
@@ -16,4 +16,4 @@ let result = (function subSetOf(sequence, radius = 1) {
 
         return result;
 
-} (permutations))
+} (input))
