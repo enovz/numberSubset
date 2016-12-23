@@ -22,11 +22,10 @@ let numberModule = (function () {
                     view.template.empty();
                 }
 
-                input.forEach(item => {
-                    view.template.append("<li>" + item + "</li>");
-                });
+                view.template.append("<li> First smaller: <h4>" + input[0] + "</h4> </li>");
+                view.template.append("<li> First bigger: <h4>" + input[1] + "</h4> </li>");
             }
-            else{
+            else {
                 alert("Invalid input");
             }
 
