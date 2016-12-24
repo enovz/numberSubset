@@ -1,7 +1,6 @@
 
-'use strict';
-
-let numberModule = (function () {
+const numberModule = (function () {
+    'use strict';
 
     //view
     let $el = $("#numberModule");
@@ -17,18 +16,22 @@ let numberModule = (function () {
 
         refresh: function refresh(input) {
 
-            if (input !== null) {
-                if (view.template.length !== 0) {
-                    view.template.empty();
+            function updateTemplate(data) {
+                
+                if (data !== null) {
+                    if (view.template.length !== 0) {
+                        view.template.empty();
+                    }
+
+                    view.template.append("<li> First smaller: <h4>" + data[0] + "</h4> </li>");
+                    view.template.append("<li> First bigger: <h4>" + data[1] + "</h4> </li>");
                 }
-
-                view.template.append("<li> First smaller: <h4>" + input[0] + "</h4> </li>");
-                view.template.append("<li> First bigger: <h4>" + input[1] + "</h4> </li>");
-            }
-            else {
-                alert("Invalid input");
+                else {
+                    alert("Invalid input");
+                }
             }
 
+            return updateTemplate(input);
         },
         isValid: function isValid(input) {
 
